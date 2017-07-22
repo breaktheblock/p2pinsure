@@ -30,8 +30,8 @@ Module not found: Error: Can't resolve '../build/contracts/MetaCoin.json' in '/U
 
 
 C:\Users\David\AppData\Roaming\npm\truf compile --compile-all
-C:\Users\David\AppData\Roaming\npm\truf migrate
+C:\Users\David\AppData\Roaming\npm\truf migrate --reset
 C:\Users\David\AppData\Roaming\npm\truf console
 
 var instance;
-Policy.deployed().then(function(i){instance = i});
+P2pinsure.deployed().then(function(i){instance = i});

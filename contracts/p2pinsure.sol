@@ -1,9 +1,11 @@
 pragma solidity ^0.4.11;
 
-contract Policy {
+contract P2pinsure {
     uint public premium;
     address public adjudicator;
-    mapping(address => bool)  members;
+    mapping(address => uint)  members;
+    uint totalValue;
+    
   
     function create(uint _premium, address _adjudicator) {
         premium = _premium;
@@ -12,17 +14,25 @@ contract Policy {
     
     function adjudicate(){}
     
-    function join(){
-       var person = msg.sender;
-       
-       if(msg.sender != adjudicator && !members[person]){
-            members[person] = true;
+    function join() payable{
+              // replace addr with msg.sender
+       address person = msg.sender;
+
+       if(person != adjudicator && members[person] != 0){
+            
         }
        
        // what if person already
     }
     
     function claim(){
+       address person = msg.sender;
+       //address person = addr;
+       person.transfer(1);
+       if(members[person] != 0){
+           
+           
+       }
     }
     
     function payout(){
@@ -34,7 +44,7 @@ contract Policy {
     {
        var person = msg.sender;
            
-        if(members[person])
+        if(members[person] != 0)
             return true;
     }
 }
