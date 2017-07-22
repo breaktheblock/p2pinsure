@@ -13,6 +13,7 @@ contract P2pinsure {
     mapping(address => uint) votesForClaim;
     string public policyName;
 
+
     event Claim(address claimant, uint amount);
     event Vote(address claimant, address voter, bool choice);
     event Payout(address claimant, uint amount);
