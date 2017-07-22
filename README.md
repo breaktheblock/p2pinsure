@@ -27,3 +27,11 @@ ERROR in ./app/main.js
 Module not found: Error: Can't resolve '../build/contracts/MetaCoin.json' in '/Users/tim/Documents/workspace/Consensys/test3/app'
  @ ./app/main.js 11:16-59
 ```
+
+
+C:\Users\David\AppData\Roaming\npm\truf compile --compile-all
+C:\Users\David\AppData\Roaming\npm\truf migrate
+C:\Users\David\AppData\Roaming\npm\truf console
+
+var instance;
+Policy.deployed().then(function(i){instance = i});
