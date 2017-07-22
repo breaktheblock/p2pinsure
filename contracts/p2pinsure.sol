@@ -7,13 +7,19 @@ contract P2pinsure {
     mapping(address => uint)  claims;
     uint totalValue;
 
+    event Claim(address claiment, uint amount);
 
     function create(uint _premium, address _adjudicator) {
         premium = _premium;
         adjudicator = _adjudicator;
     }
 
-    function adjudicate(){}
+    function adjudicate(address claimant, bool approve){
+        require(msg.sender == adjudicator);
+        if(approve){
+            claimant.transfer(claims[claimant]);
+        }
+    }
 
     function join() payable {
        address person = msg.sender;
@@ -27,6 +33,7 @@ contract P2pinsure {
        address person = msg.sender;
        require(members[person] > 0);
        claims[person] = amount;
+       Claim(person, amount);
     }
 
     function payout(){
