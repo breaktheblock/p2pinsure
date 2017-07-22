@@ -1,19 +1,19 @@
 pragma solidity ^0.4.11;
 
-contract policy {
-    unit public premium;
+contract Policy {
+    uint public premium;
     address public adjudicator;
     mapping(address => bool)  members;
   
-    function create(unit _premium, address _adjudicator) {
+    function create(uint _premium, address _adjudicator) {
         premium = _premium;
-        adjudicator = _adjudicator
+        adjudicator = _adjudicator;
     }
     
     function adjudicate(){}
     
     function join(){
-       person = msg.sender;
+       var person = msg.sender;
        
        if(msg.sender != adjudicator && !members[person]){
             members[person] = true;
@@ -32,6 +32,8 @@ contract policy {
     function isMember()
         returns (bool isMember)
     {
+       var person = msg.sender;
+           
         if(members[person])
             return true;
     }
