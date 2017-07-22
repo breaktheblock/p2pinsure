@@ -7,14 +7,14 @@ contract P2pinsure {
     mapping(address => uint)  claims;
     uint totalValue;
     mapping(address => uint) votesForClaim;
+    bool voting;
 
     event Claim(address claiment, uint amount);
 
-    function create(uint _premium, address _adjudicator, bool _voting) {
-        premium = _premium;
+    function create(address _adjudicator, bool _voting) {
+        premium = 10;
         adjudicator = _adjudicator;
-        voting = _voting
-        quorum = ...
+        voting = _voting;
     }
 
     function adjudicate(address claimant, bool approve){
@@ -37,11 +37,6 @@ contract P2pinsure {
        require(members[person] > 0);
        claims[person] = amount;
        Claim(person, amount);
-    }
-
-    function vote(address claimant, bool approve){
-        votesForClaim[claimant] += 1;
-        
     }
 
     function isMember()

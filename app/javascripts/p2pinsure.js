@@ -6,10 +6,10 @@ import { default as Web3} from 'web3';
 import { default as contract } from 'truffle-contract'
 
 // Import our contract artifacts and turn them into usable abstractions.
-import p2pinsure_artifacts from '../../build/contracts/P2pinsure.json'
+import metacoin_artifacts from '../../build/contracts/MetaCoin.json'
 
 // MetaCoin is our usable abstraction, which we'll use through the code below.
-var P2pInsure = contract(p2pinsure_artifacts);
+var MetaCoin = contract(metacoin_artifacts);
 
 // The following code is simple to show off interacting with your contracts.
 // As your needs grow you will likely need to change its form and structure.
@@ -22,7 +22,7 @@ window.App = {
     var self = this;
 
     // Bootstrap the MetaCoin abstraction for Use.
-    P2pInsure.setProvider(web3.currentProvider);
+    MetaCoin.setProvider(web3.currentProvider);
 
     // Get the initial account balance so it can be displayed.
     web3.eth.getAccounts(function(err, accs) {
@@ -39,50 +39,49 @@ window.App = {
       accounts = accs;
       account = accounts[0];
 
-       var accountsHtml = "";
-
-        accountsHtml = accountsHtml + "<option value='0'>Adjudicator</option>";
-        accountsHtml = accountsHtml + "<option value='1'>Creator</option>";
-        accountsHtml = accountsHtml + "<option value='2'>Friend #1</option>";
-        accountsHtml = accountsHtml + "<option value='3'>Friend #2</option>";
-
-
-      for(var i = 3; i<accounts.length; i++){
-        accountsHtml = accountsHtml + "<option value='" + i + "'>" + i +"</option>"
-      }
-
-      $("#accounts").html(accountsHtml);
-      $("#accounts").on("change", function() {
-                      account = accounts[this.value]
-                                        });
+      self.refreshBalance();
     });
   },
 
-  setStatus: function(mess) {
+  setStatus: function(message) {
     var status = document.getElementById("status");
     status.innerHTML = message;
   },
 
-  setAccount: function(accountNo) {
-    account = accounts[accountNo];
+  refreshBalance: function() {
+    var self = this;
+
+    var meta;
+    MetaCoin.deployed().then(function(instance) {
+      meta = instance;
+      return meta.getBalance.call(account, {from: account});
+    }).then(function(value) {
+      var balance_element = document.getElementById("balance");
+      balance_element.innerHTML = value.valueOf();
+    }).catch(function(e) {
+      console.log(e);
+      self.setStatus("Error getting balance; see log.");
+    });
   },
 
-  createPolicy: function(){
+  sendCoin: function() {
     var self = this;
-    var p2p;
-    var adjudicator = document.getElementById("adjudicator").value;
-    var name = document.getElementById("policyName").value;
-    var votingOpt = $('#resolution').find(":selected").text();
-    var voting = false;
-    if  (votingOpt === "voting")
-        voting = true;
 
-    //     function create(address _adjudicator, bool _voting) {
-    P2pInsure.deployed().then(function(instance) {
-      p2p = instance;
-      return meta.create(adjudicator, voting, name, {from: account});
+    var amount = parseInt(document.getElementById("amount").value);
+    var receiver = document.getElementById("receiver").value;
+
+    this.setStatus("Initiating transaction... (please wait)");
+
+    var meta;
+    MetaCoin.deployed().then(function(instance) {
+      meta = instance;
+      return meta.sendCoin(receiver, amount, {from: account});
     }).then(function() {
-      self.setStatus("Contract created!");
+      self.setStatus("Transaction complete!");
+      self.refreshBalance();
+    }).catch(function(e) {
+      console.log(e);
+      self.setStatus("Error sending coin; see log.");
     });
   }
 };
