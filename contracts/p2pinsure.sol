@@ -27,7 +27,7 @@ contract P2pinsure {
 
 //
     function P2pinsure(address _adjudicator, bool _isVotingResolutionMethod,
-                    string _policyName, uint _maxPoolSize){
+                    string _policyName, uint _maxPoolSize, uint _joiningCriteria){
         // _joiningCriteria - open, owner approval, voting
         // max pool size
         owner = msg.sender;
@@ -37,6 +37,7 @@ contract P2pinsure {
         quorumMultiplier = 2;
         policyName = _policyName;
         maxPoolSize = _maxPoolSize;
+        joiningCriteria = _joiningCriteria;
     }
 
     function adjudicate(address claimant, bool approve, uint negative_adjustment){
