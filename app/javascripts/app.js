@@ -21,8 +21,22 @@ window.App = {
   start: function() {
     var self = this;
 
+
     // Bootstrap the MetaCoin abstraction for Use.
     P2pInsure.setProvider(web3.currentProvider);
+
+    $("#adjudicatorArea").hide();
+    $("#resolution").on("change", function() {
+        if(this.value === "adjudicator"){
+            $("#adjudicatorArea").show();
+        } else if(this.value === "voting"){
+            $("#adjudicatorArea").hide();
+        } else if(this.value === "oracle"){
+            $("#adjudicatorArea").hide();
+        }
+    });
+
+
 
     // Get the initial account balance so it can be displayed.
     web3.eth.getAccounts(function(err, accs) {
@@ -58,7 +72,7 @@ window.App = {
     });
   },
 
-  setStatus: function(mess) {
+  setStatus: function(message) {
     var status = document.getElementById("status");
     status.innerHTML = message;
   },
@@ -70,17 +84,21 @@ window.App = {
   createPolicy: function(){
     var self = this;
     var p2p;
-    var adjudicator = document.getElementById("adjudicator").value;
-    var name = document.getElementById("policyName").value;
+    var adjudicator = $('#adjudicator').val();
+    var name = $('#policyName').val();
     var votingOpt = $('#resolution').find(":selected").text();
     var voting = false;
     if  (votingOpt === "voting")
         voting = true;
 
+    var maxPoolSize = $('#maxPoolSize').val();
+
+    var joiningCriteria = $('#joiningCriteria').find(":selected").text();
+
     //     function create(address _adjudicator, bool _voting) {
     P2pInsure.deployed().then(function(instance) {
       p2p = instance;
-      return meta.create(adjudicator, voting, name, {from: account});
+      return p2p.create(adjudicator, voting, name, {from: account});
     }).then(function() {
       self.setStatus("Contract created!");
     });
