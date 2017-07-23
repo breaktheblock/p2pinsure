@@ -50,6 +50,7 @@ contract P2pinsure {
 
 
     function ownerWhitelist(address requestingAddress) {
+        require(msg.sender == owner);
         if(joiningCriteria == 1) {
             whitelist[requestingAddress] = true;
         }
