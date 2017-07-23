@@ -31,4 +31,9 @@ p2pinsure.sol - This is our contract that represents a created peer-to-peer insu
       - Voting 
       - Independent Adjudicator
       - Automatically through an oracle
+      
+## Todo
+- UI
+- Uploading policy document to IPFS
+- Move funds from policy pool to central pool
 
