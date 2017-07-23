@@ -1,37 +1,39 @@
-# truffle-init-webpack
-Example webpack project with Truffle. Includes contracts, migrations, tests, user interface and webpack build pipeline.
+# P2P insure
+Mutuals were orginally set up by communities of people with shared interests to protect each other. Mutuals allow peer-to-peer cooperative insurance. Currently creating a mutual insurance is hard for groups who have no/little access to insurance markets or believe they can self insure more efficently. We want to enable people to be able to create thier own peer-to-peer insurance policies and we are going to use the blockchain to do it.
 
-## Usage
+## Potential use cases
 
-To initialize a project with this example, run `truffle init webpack` inside an empty directory.
+- People where traditional insurance gives them a higher risk profile than they feel should have: For example highend sports cars owners who get higher insurance premiums but who are more likely to be safer drivers because they are obessed with thier cars
+- People in developing countries with micro-businesses where traditional insurance compaines do not cover thier risks: For example a village self insuring each other for 
+- Insuring things which insurance companies struggle to value but the community can: for example niche pottery collections
 
-## Building and the frontend
+## Why block chain
 
-1. First run `truffle compile`, then run `truffle migrate` to deploy the contracts onto your network of choice (default "development").
-1. Then run `npm run dev` to build the app and serve it on http://localhost:8080
+- Naturally decentralised
+- Trustless - Don't need to trust a central authority (unless you pick an adjudicator)
+- Process efficency: Payments are automated and claims process (guarantee of playments)
+- Low cost of running: No need for servers, databases
 
-## Possible upgrades
+# What are the issues
 
-* Use the webpack hotloader to sense when contracts or javascript have been recompiled and rebuild the application. Contributions welcome!
+- Claims handling: We plan to resolve this by giving people a choice on how to do it
+- Premium pricing: we initially use a fixed premium but based off claims data we adjust the premium. This can be coded into the smart contract. 
+- Depletion of pool: We plan to resolve it by 50% of the premiums of a pool going to a central pool which can be used to cover any losses when the pool
 
-## Common Errors
+## What we've built
 
-* **Error: Can't resolve '../build/contracts/MetaCoin.json'**
+We plan to build a front end demostrating the process of setting up a policy
+p2pinsure.sol - This is our contract that represents a created peer-to-peer insurance policy:
+   - Create - Creates the policy
+   - The policy can then be joined (by invite only or open to everyone)
+   - Claims can be made via blockchain
+   - Claims can be resolved one of three ways decided when the policy was created
+      - Voting 
+      - Independent Adjudicator
+      - Automatically through an oracle
+      
+## Todo
+- UI
+- Uploading policy document to IPFS
+- Move funds from policy pool to central pool
 
-This means you haven't compiled or migrated your contracts yet. Run `truffle compile` and `truffle migrate` first.
-
-Full error:
-
-```
-ERROR in ./app/main.js
-Module not found: Error: Can't resolve '../build/contracts/MetaCoin.json' in '/Users/tim/Documents/workspace/Consensys/test3/app'
- @ ./app/main.js 11:16-59
-```
-
-
-C:\Users\David\AppData\Roaming\npm\truf compile --compile-all
-C:\Users\David\AppData\Roaming\npm\truf migrate --reset
-C:\Users\David\AppData\Roaming\npm\truf console
-
-var instance;
-P2pinsure.deployed().then(function(i){instance = i});
