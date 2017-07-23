@@ -5,8 +5,8 @@ contract P2pinsure {
     uint public quorumMultiplier;
     address public adjudicator;
     address public owner;
-    mapping(address => uint)  members;
     uint public memberCount;
+    mapping(address => uint)  members;
     mapping(address => uint64)  claims;
     mapping(address => mapping(address => bool)) claimantVoterMap;
     mapping(address => bool) public joinRequests;
