@@ -37,3 +37,18 @@ p2pinsure.sol - This is our contract that represents a created peer-to-peer insu
 - Uploading policy document to IPFS
 - Move funds from policy pool to central pool
 
+
+## Build and run
+using https://github.com/makoto/london-ethereum-codeup/blob/master/tutorials/truffle.md as setup
+
+blockchain:
+in a window
+   testrpc
+in another window
+truffle compile --compile-all
+truffle migrate --reset
+
+website:
+cd: .\p2pinsure
+npm run build
+npm run dev
