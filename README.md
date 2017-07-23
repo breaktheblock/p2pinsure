@@ -2,7 +2,7 @@
 Mutuals were orginally set up by communities of people with shared interests to protect each other. Mutuals allow peer-to-peer cooperative insurance. Currently creating a mutual insurance is hard for groups who have no/little access to insurance markets or believe they can self insure more efficently. We want to enable people to be able to create thier own peer-to-peer insurance policies and we are going to use the blockchain to do it.
 
 ## Us:
-Ed, Dave, Peter. We're new to Blockchain and etherum :)
+Ed, Dave, Peter (and nic for a bit). We're new to Blockchain and etherum :)
 
 ## Potential use cases
 
