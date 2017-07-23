@@ -1,6 +1,9 @@
 # P2P insure
 Mutuals were orginally set up by communities of people with shared interests to protect each other. Mutuals allow peer-to-peer cooperative insurance. Currently creating a mutual insurance is hard for groups who have no/little access to insurance markets or believe they can self insure more efficently. We want to enable people to be able to create thier own peer-to-peer insurance policies and we are going to use the blockchain to do it.
 
+## Us:
+Ed, Dave, Peter (and nic for a bit). We're new to Blockchain and etherum :)
+
 ## Potential use cases
 
 - People where traditional insurance gives them a higher risk profile than they feel should have: For example highend sports cars owners who get higher insurance premiums but who are more likely to be safer drivers because they are obessed with thier cars
@@ -37,3 +40,18 @@ p2pinsure.sol - This is our contract that represents a created peer-to-peer insu
 - Uploading policy document to IPFS
 - Move funds from policy pool to central pool
 
+
+## Build and run
+using https://github.com/makoto/london-ethereum-codeup/blob/master/tutorials/truffle.md as setup
+
+blockchain:
+in a window
+   testrpc
+in another window
+truffle compile --compile-all
+truffle migrate --reset
+
+website:
+cd: .\p2pinsure
+npm run build
+npm run dev
